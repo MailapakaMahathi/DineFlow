@@ -313,10 +313,12 @@ DineFlow/
 
 ---
 
-## 📄 License
-
-This project is developed for educational and demonstration purposes. You may add an appropriate open-source license if you intend to distribute or reuse the source code.
-
----
+<img width="1339" height="722" alt="image" src="https://github.com/user-attachments/assets/2ba6be5c-2015-4a58-9558-82e6b7dfc653" />
+<img width="1324" height="717" alt="image" src="https://github.com/user-attachments/assets/83fd51b6-83b2-4b21-9f97-2895b29b0078" />
+<img width="1334" height="717" alt="image" src="https://github.com/user-attachments/assets/874eb739-adda-41a8-b79e-c84fab4e14b7" />
+<img width="1326" height="712" alt="image" src="https://github.com/user-attachments/assets/227a5ff2-f444-4ddd-88f3-b983dd514baa" />
+<img width="1335" height="698" alt="image" src="https://github.com/user-attachments/assets/62c13f34-a571-4230-b1d0-4033036d573f" />
+<img width="1335" height="706" alt="image" src="https://github.com/user-attachments/assets/f7b159ce-a907-4d9f-8f8e-a37317ece5c0" />
+<img width="1318" height="707" alt="image" src="https://github.com/user-attachments/assets/9ccfad96-655c-4015-9360-8014bc91bd05" />
 
 **DineFlow – Simplifying Restaurant Operations, One Order at a Time!** 🍽️
