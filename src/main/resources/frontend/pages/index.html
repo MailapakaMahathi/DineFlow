@@ -1,0 +1,1104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DineFlow | Restaurant Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">D</div>
+            <div>
+                <h2>DineFlow</h2>
+                <span>Restaurant Manager</span>
+            </div>
+        </div>
+
+        <div class="menu-label">MAIN MENU</div>
+
+        <button class="nav-item active" data-page="dashboard">
+            <span class="nav-icon">🏠</span> Dashboard
+        </button>
+
+        <button class="nav-item" data-page="orders">
+            <span class="nav-icon">🍽</span> Food Ordering
+        </button>
+
+        <button class="nav-item" data-page="menu">
+            <span class="nav-icon">🍜</span> Menu Management
+        </button>
+
+        <button class="nav-item" data-page="inventory">
+            <span class="nav-icon">📦</span> Inventory
+        </button>
+
+        <button class="nav-item" data-page="billing">
+            <span class="nav-icon">💳</span> Billing
+        </button>
+
+        <button class="nav-item" data-page="vendors">
+            <span class="nav-icon">🚚</span> Vendor Notifications
+        </button>
+
+        <button class="nav-item" data-page="reports">
+            <span class="nav-icon">📊</span> Sales Reports
+        </button>
+
+        <div class="sidebar-bottom">
+            <div class="admin-profile">
+                <div class="avatar">AD</div>
+                <div>
+                    <strong>Administrator</strong>
+                    <span>Restaurant Admin</span>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome back! Here's what's happening today.</p>
+            </div>
+
+            <div class="topbar-right">
+                <div class="date-display">
+                    <span>📅</span>
+                    <span id="currentDate">Today</span>
+                </div>
+
+                <div class="notification-icon">
+                    🔔
+                    <span class="notification-dot"></span>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD PAGE -->
+        <section id="dashboardPage" class="dashboard-content page-content">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Overview</h2>
+                    <p>Restaurant performance at a glance</p>
+                </div>
+
+                <span class="live-status">
+                    <span class="live-dot"></span>
+                    Live Overview
+                </span>
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Revenue</span>
+                        <span class="stat-icon revenue-icon">₹</span>
+                    </div>
+                    <h2 id="totalRevenue">₹0.00</h2>
+                    <p>Today's revenue</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Orders</span>
+                        <span class="stat-icon orders-icon">🍽</span>
+                    </div>
+                    <h2 id="totalOrders">0</h2>
+                    <p>Orders received today</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Menu Items</span>
+                        <span class="stat-icon menu-icon">🍱</span>
+                    </div>
+                    <h2 id="totalMenuItems">0</h2>
+                    <p>Available food items</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Low Stock Items</span>
+                        <span class="stat-icon stock-icon">⚠️</span>
+                    </div>
+                    <h2 id="lowStockItems">0</h2>
+                    <p>Items requiring attention</p>
+                </div>
+
+            </div>
+
+            <div class="middle-grid">
+
+                <div class="content-card sales-card">
+                    <div class="card-heading">
+                        <div>
+                            <h3>Sales Overview</h3>
+                            <p>Restaurant sales performance</p>
+                        </div>
+						<div style="display:flex; align-items:center; gap:12px;">
+						    <strong id="dashboardSalesRevenue">₹0.00</strong>
+
+						    <select id="dashboardSalesPeriod"
+						            class="period-label"
+						            style="border:1px solid #e5eaf2; border-radius:8px; padding:8px;">
+						        <option value="WEEK" selected>This Week</option>
+						        <option value="MONTH">This Month</option>
+						        <option value="YEAR">This Year</option>
+						    </select>
+						</div>
+                    </div>
+
+                    <div class="chart-placeholder" id="salesChart">
+                        <p>Sales analytics will appear here.</p>
+                    </div>
+                </div>
+
+                <div class="content-card inventory-card">
+                    <div class="card-heading">
+                        <div>
+                            <h3>Inventory Status</h3>
+                            <p>Current stock summary</p>
+                        </div>
+                    </div>
+
+                    <div class="inventory-summary">
+
+                        <div class="inventory-row">
+                            <span class="status-indicator in-stock"></span>
+                            <span>In Stock</span>
+                            <strong id="inStockCount">0</strong>
+                        </div>
+
+                        <div class="inventory-row">
+                            <span class="status-indicator low-stock"></span>
+                            <span>Low Stock</span>
+                            <strong id="lowStockCount">0</strong>
+                        </div>
+
+                        <div class="inventory-row">
+                            <span class="status-indicator out-stock"></span>
+                            <span>Out of Stock</span>
+                            <strong id="outStockCount">0</strong>
+                        </div>
+
+                    </div>
+
+                    <button class="secondary-button" data-page="inventory">
+                        Manage Inventory →
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="content-card recent-orders">
+
+                <div class="card-heading">
+                    <div>
+                        <h3>Recent Orders</h3>
+                        <p>Latest restaurant transactions</p>
+                    </div>
+
+                    <button class="secondary-button" data-page="orders">
+                        View All →
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="recentOrdersBody">
+                            <tr>
+                                <td colspan="6" class="empty-message">
+                                    No orders available yet.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <footer class="dashboard-footer">
+                <p>© 2026 DineFlow. Restaurant Management System.</p>
+                <p>Smart Operations. Better Management.</p>
+            </footer>
+
+        </section>
+
+
+        <!-- FOOD ORDERING PAGE -->
+        <section id="ordersPage" class="page-content" style="display:none;">
+
+            <div class="section-heading">
+                <div>
+                    <p>Explore our menu and add delicious items to your cart.</p>
+                </div>
+            </div>
+
+            <div class="ordering-layout">
+
+                <div class="menu-section">
+
+                    <div class="menu-toolbar">
+                        <h3>Our Menu</h3>
+
+                        <select id="categoryFilter">
+                            <option value="All">All Categories</option>
+                        </select>
+                    </div>
+
+                    <div id="menuItemsContainer" class="menu-items-grid">
+                        <p>Loading menu items...</p>
+                    </div>
+
+                </div>
+
+
+                <div class="cart-section">
+
+                    <h3>🛒 Your Cart</h3>
+
+                    <div id="cartItems">
+                        <p>Your cart is empty.</p>
+                    </div>
+
+                    <div class="cart-summary">
+
+                        <div>
+                            <span>Subtotal</span>
+                            <strong id="cartSubtotal">₹0.00</strong>
+                        </div>
+
+                        <div>
+                            <span>GST (5%)</span>
+                            <strong id="cartTax">₹0.00</strong>
+                        </div>
+
+                        <div>
+                            <span>Discount (₹)</span>
+                            <input type="number" id="discountAmount"
+                                   value="0" min="0" step="0.01">
+                        </div>
+
+                        <div class="cart-total">
+                            <span>Total Amount</span>
+                            <strong id="cartTotal">₹0.00</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="checkout-form">
+
+                        <h3>👤 Customer Details</h3>
+
+                        <label for="customerName">Customer Name</label>
+                        <input type="text" id="customerName"
+                               placeholder="Enter customer name">
+
+                        <label for="paymentMethod">Payment Method</label>
+
+                        <select id="paymentMethod">
+                            <option value="">Select Payment Method</option>
+                            <option value="CASH">Cash</option>
+                            <option value="UPI">UPI</option>
+                            <option value="CARD">Card</option>
+                        </select>
+
+                        <button id="proceedToBilling"
+                                class="primary-btn" disabled>
+                            Confirm Order →
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MENU MANAGEMENT PAGE -->
+        <section id="menuPage" class="page-content"
+                 style="display:none;">
+
+            <div class="section-heading">
+                <div>
+                    <p>Manage food items, prices and availability.</p>
+                </div>
+
+                <button class="primary-btn" id="openAddMenuModal">
+                    + Add New Item
+                </button>
+            </div>
+
+
+            <!-- MENU STATISTICS -->
+            <div class="stats-grid menu-management-stats">
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Items</span>
+                        <span class="stat-icon menu-icon">🍽</span>
+                    </div>
+                    <h2 id="managementTotalItems">0</h2>
+                    <p>All menu records</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Active Items</span>
+                        <span class="stat-icon revenue-icon">✓</span>
+                    </div>
+                    <h2 id="managementActiveItems">0</h2>
+                    <p>Currently available</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Low Stock</span>
+                        <span class="stat-icon stock-icon">⚠️</span>
+                    </div>
+                    <h2 id="managementLowStock">0</h2>
+                    <p>Items needing attention</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Inactive Items</span>
+                        <span class="stat-icon orders-icon">⊘</span>
+                    </div>
+                    <h2 id="managementInactiveItems">0</h2>
+                    <p>Deactivated menu items</p>
+                </div>
+
+            </div>
+
+
+            <!-- MENU TABLE -->
+            <div class="content-card menu-management-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h3>Restaurant Menu</h3>
+                        <p>View and manage all food items</p>
+                    </div>
+
+                    <button class="secondary-button" id="refreshMenuManagement">
+                        ↻ Refresh
+                    </button>
+                </div>
+
+
+                <div class="menu-management-toolbar">
+
+                    <input type="text"
+                           id="menuSearchInput"
+                           placeholder="Search food items...">
+
+                    <select id="managementCategoryFilter">
+                        <option value="All">All Categories</option>
+                    </select>
+
+                    <select id="managementStatusFilter">
+                        <option value="All">All Status</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table class="management-table">
+
+                        <thead>
+                            <tr>
+                                <th>Item ID</th>
+                                <th>Food Item</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Vendor</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="managementMenuBody">
+                            <tr>
+                                <td colspan="8" class="empty-message">
+                                    Loading menu items...
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INVENTORY MANAGEMENT PAGE -->
+        <section id="inventoryPage" class="page-content"
+                 style="display:none;">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Inventory Management</h2>
+                    <p>Monitor stock levels and update item quantities.</p>
+                </div>
+
+                <button class="secondary-button" id="refreshInventory">
+                    ↻ Refresh
+                </button>
+            </div>
+
+
+            <!-- INVENTORY STATISTICS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Items</span>
+                        <span class="stat-icon menu-icon">📦</span>
+                    </div>
+                    <h2 id="inventoryTotalItems">0</h2>
+                    <p>Active inventory items</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>In Stock</span>
+                        <span class="stat-icon revenue-icon">✓</span>
+                    </div>
+                    <h2 id="inventoryInStock">0</h2>
+                    <p>Healthy stock levels</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Low Stock</span>
+                        <span class="stat-icon stock-icon">⚠️</span>
+                    </div>
+                    <h2 id="inventoryLowStock">0</h2>
+                    <p>Requires replenishment</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-top">
+                        <span>Out of Stock</span>
+                        <span class="stat-icon orders-icon">!</span>
+                    </div>
+                    <h2 id="inventoryOutOfStock">0</h2>
+                    <p>Unavailable items</p>
+                </div>
+
+            </div>
+
+
+            <!-- INVENTORY TABLE -->
+            <div class="content-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h3>Stock Management</h3>
+                        <p>View and update restaurant inventory.</p>
+                    </div>
+                </div>
+
+
+                <div class="menu-management-toolbar">
+
+                    <input type="text"
+                           id="inventorySearch"
+                           placeholder="Search food items...">
+
+                    <select id="inventoryStatusFilter">
+                        <option value="All">All Stock Status</option>
+                        <option value="IN STOCK">In Stock</option>
+                        <option value="LOW STOCK">Low Stock</option>
+                        <option value="OUT OF STOCK">Out of Stock</option>
+                    </select>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table class="management-table">
+
+                        <thead>
+                            <tr>
+                                <th>Item ID</th>
+                                <th>Food Item</th>
+                                <th>Category</th>
+                                <th>Current Stock</th>
+                                <th>Stock Status</th>
+                                <th>New Quantity</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="inventoryTableBody">
+                            <tr>
+                                <td colspan="7" class="empty-message">
+                                    Inventory items will appear here.
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+		<!-- BILLING PAGE -->
+		<section id="billingPage" class="page-content"
+		         style="display:none;">
+
+		    <div class="section-heading">
+		        <div>
+		            <h2>Billing & Payments</h2>
+		            <p>View customer transactions and generate invoices.</p>
+		        </div>
+
+		        <button class="secondary-button" id="refreshBilling">
+		            ↻ Refresh
+		        </button>
+		    </div>
+
+		    <!-- BILLING STATISTICS -->
+		    <div class="stats-grid">
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Total Orders</span>
+		                <span class="stat-icon orders-icon">🧾</span>
+		            </div>
+		            <h2 id="billingTotalOrders">0</h2>
+		            <p>All recorded orders</p>
+		        </div>
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Total Revenue</span>
+		                <span class="stat-icon revenue-icon">₹</span>
+		            </div>
+		            <h2 id="billingTotalRevenue">₹0.00</h2>
+		            <p>Revenue from completed orders</p>
+		        </div>
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Successful Payments</span>
+		                <span class="stat-icon menu-icon">✓</span>
+		            </div>
+		            <h2 id="billingSuccessfulPayments">0</h2>
+		            <p>Recorded successful payments</p>
+		        </div>
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Pending Payments</span>
+		                <span class="stat-icon stock-icon">!</span>
+		            </div>
+		            <h2 id="billingPendingPayments">0</h2>
+		            <p>Payments requiring attention</p>
+		        </div>
+
+		    </div>
+
+		    <!-- ORDER HISTORY -->
+		    <div class="content-card">
+
+		        <div class="card-heading">
+		            <div>
+		                <h3>Transaction History</h3>
+		                <p>All customer orders and payment details</p>
+		            </div>
+		        </div>
+
+		        <div class="menu-management-toolbar">
+
+		            <input type="text"
+		                   id="billingSearch"
+		                   placeholder="Search by order ID or customer...">
+
+		            <select id="billingPaymentFilter">
+		                <option value="All">All Payment Methods</option>
+		                <option value="CASH">Cash</option>
+		                <option value="UPI">UPI</option>
+		                <option value="CARD">Card</option>
+		            </select>
+
+		        </div>
+
+		        <div class="table-container">
+
+		            <table class="management-table">
+
+		                <thead>
+		                    <tr>
+		                        <th>Order ID</th>
+		                        <th>Customer</th>
+		                        <th>Date</th>
+		                        <th>Subtotal</th>
+		                        <th>Tax</th>
+		                        <th>Discount</th>
+		                        <th>Total</th>
+		                        <th>Payment</th>
+		                        <th>Status</th>
+		                        <th>Invoice</th>
+		                    </tr>
+		                </thead>
+
+		                <tbody id="billingOrdersBody">
+		                    <tr>
+		                        <td colspan="10" class="empty-message">
+		                            Billing records will appear here.
+		                        </td>
+		                    </tr>
+		                </tbody>
+
+		            </table>
+
+		        </div>
+
+		    </div>
+
+		</section>
+
+		<!-- VENDOR NOTIFICATIONS PAGE -->
+		<section id="vendorsPage" class="page-content" style="display:none;">
+
+		    <div class="section-heading">
+		        <div>
+		            <h2>Manage Vendors</h2>
+		            <p>Track low-stock alerts and vendor SMS delivery status.</p>
+		        </div>
+
+		        <button class="secondary-button" id="refreshVendorNotifications">
+		            ↻ Refresh
+		        </button>
+		    </div>
+
+		    <!-- NOTIFICATION STATISTICS -->
+		    <div class="stats-grid">
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Total Notifications</span>
+		                <span class="stat-icon menu-icon">📨</span>
+		            </div>
+		            <h2 id="vendorTotalNotifications">0</h2>
+		            <p>All notification records</p>
+		        </div>
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Sent</span>
+		                <span class="stat-icon revenue-icon">✓</span>
+		            </div>
+		            <h2 id="vendorSentNotifications">0</h2>
+		            <p>Successfully sent</p>
+		        </div>
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Pending</span>
+		                <span class="stat-icon stock-icon">⏳</span>
+		            </div>
+		            <h2 id="vendorPendingNotifications">0</h2>
+		            <p>Awaiting delivery</p>
+		        </div>
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Failed</span>
+		                <span class="stat-icon orders-icon">!</span>
+		            </div>
+		            <h2 id="vendorFailedNotifications">0</h2>
+		            <p>Failed attempts</p>
+		        </div>
+
+		    </div>
+
+		    <!-- NOTIFICATION HISTORY -->
+		    <div class="content-card">
+
+		        <div class="card-heading">
+		            <div>
+		                <h3>Notification History</h3>
+		                <p>View SMS alerts sent to restaurant vendors.</p>
+		            </div>
+		        </div>
+
+		        <div class="menu-management-toolbar">
+
+		            <input
+		                type="text"
+		                id="vendorNotificationSearch"
+		                placeholder="Search item or vendor..."
+		            >
+
+		            <select id="vendorNotificationStatus">
+		                <option value="All">All Status</option>
+		                <option value="SENT">Sent</option>
+		                <option value="PENDING">Pending</option>
+		                <option value="FAILED">Failed</option>
+		            </select>
+
+		        </div>
+
+		        <div class="table-container">
+
+		            <table class="management-table">
+
+		                <thead>
+		                    <tr>
+		                        <th>ID</th>
+		                        <th>Food Item</th>
+		                        <th>Vendor</th>
+		                        <th>Phone</th>
+		                        <th>Message</th>
+		                        <th>Status</th>
+		                        <th>Attempts</th>
+		                        <th>Created At</th>
+		                    </tr>
+		                </thead>
+
+		                <tbody id="vendorNotificationsBody">
+		                    <tr>
+		                        <td colspan="8" class="empty-message">
+		                            No vendor notifications available.
+		                        </td>
+		                    </tr>
+		                </tbody>
+
+		            </table>
+
+		        </div>
+
+		    </div>
+
+		</section>
+
+		<!-- SALES REPORTS PAGE -->
+		<section id="reportsPage" class="page-content" style="display:none;">
+
+		    <div class="section-heading">
+		        <div>
+		            <h2>Sales Reports</h2>
+		            <p>Analyze restaurant revenue, orders and sales performance.</p>
+		        </div>
+
+		        <button class="secondary-button" id="refreshReports">
+		            ↻ Refresh Reports
+		        </button>
+		    </div>
+
+		    <!-- DATE FILTER -->
+		    <div class="content-card">
+		        <div class="menu-management-toolbar">
+
+		            <select id="reportPeriod">
+		                <option value="TODAY">Today</option>
+		                <option value="WEEK" selected>This Week</option>
+		                <option value="MONTH">This Month</option>
+		                <option value="YEAR">This Year</option>
+		                <option value="ALL">All Time</option>
+		            </select>
+
+		            <label for="reportStartDate">From:</label>
+		            <input type="date" id="reportStartDate">
+
+		            <label for="reportEndDate">To:</label>
+		            <input type="date" id="reportEndDate">
+
+		            <button class="primary-btn" id="applyReportFilter">
+		                Apply Filter
+		            </button>
+
+		        </div>
+		    </div>
+
+		    <!-- SALES STATISTICS -->
+		    <div class="stats-grid">
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Total Revenue</span>
+		                <span class="stat-icon revenue-icon">₹</span>
+		            </div>
+		            <h2 id="reportTotalRevenue">₹0.00</h2>
+		            <p>Revenue from recorded payments</p>
+		        </div>
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Total Orders</span>
+		                <span class="stat-icon orders-icon">🧾</span>
+		            </div>
+		            <h2 id="reportTotalOrders">0</h2>
+		            <p>Orders in selected period</p>
+		        </div>
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Average Order Value</span>
+		                <span class="stat-icon menu-icon">₹</span>
+		            </div>
+		            <h2 id="reportAverageOrder">₹0.00</h2>
+		            <p>Average revenue per order</p>
+		        </div>
+
+		        <div class="stat-card">
+		            <div class="stat-top">
+		                <span>Items Sold</span>
+		                <span class="stat-icon stock-icon">🍽</span>
+		            </div>
+		            <h2 id="reportItemsSold">0</h2>
+		            <p>Total quantity sold</p>
+		        </div>
+
+		    </div>
+
+		    <!-- SALES CHART -->
+		    <div class="content-card">
+		        <div class="card-heading">
+		            <div>
+		                <h3>Revenue Trend</h3>
+		                <p>Sales revenue over the selected period</p>
+		            </div>
+		        </div>
+
+		        <div id="reportSalesChart" class="chart-placeholder">
+		            <p>Sales chart will appear here.</p>
+		        </div>
+		    </div>
+
+		    <!-- TOP SELLING ITEMS AND PAYMENT ANALYSIS -->
+		    <div class="middle-grid">
+
+		        <div class="content-card">
+		            <div class="card-heading">
+		                <div>
+		                    <h3>Top-Selling Items</h3>
+		                    <p>Best-performing food items</p>
+		                </div>
+		            </div>
+
+		            <div class="table-container">
+		                <table class="management-table">
+		                    <thead>
+		                        <tr>
+		                            <th>Food Item</th>
+		                            <th>Quantity Sold</th>
+		                            <th>Revenue</th>
+		                        </tr>
+		                    </thead>
+
+		                    <tbody id="topSellingItemsBody">
+		                        <tr>
+		                            <td colspan="3" class="empty-message">
+		                                Sales data will appear here.
+		                            </td>
+		                        </tr>
+		                    </tbody>
+		                </table>
+		            </div>
+		        </div>
+
+		        <div class="content-card">
+		            <div class="card-heading">
+		                <div>
+		                    <h3>Payment Analysis</h3>
+		                    <p>Revenue by payment method</p>
+		                </div>
+		            </div>
+
+		            <div id="paymentAnalysisBody">
+		                <p class="empty-message">
+		                    Payment analysis will appear here.
+		                </p>
+		            </div>
+		        </div>
+
+		    </div>
+
+		    <!-- DAILY SALES TABLE -->
+		    <div class="content-card">
+
+		        <div class="card-heading">
+		            <div>
+		                <h3>Sales Breakdown</h3>
+		                <p>Revenue and orders grouped by date</p>
+		            </div>
+		        </div>
+
+		        <div class="table-container">
+		            <table class="management-table">
+
+		                <thead>
+		                    <tr>
+		                        <th>Date</th>
+		                        <th>Orders</th>
+		                        <th>Items Sold</th>
+		                        <th>Revenue</th>
+		                    </tr>
+		                </thead>
+
+		                <tbody id="salesBreakdownBody">
+		                    <tr>
+		                        <td colspan="4" class="empty-message">
+		                            Sales breakdown will appear here.
+		                        </td>
+		                    </tr>
+		                </tbody>
+
+		            </table>
+		        </div>
+
+		    </div>
+
+		</section>
+
+
+
+
+    </main>
+
+</div>
+
+
+<!-- ADD / EDIT MENU ITEM MODAL -->
+<div id="menuItemModal" class="menu-modal" style="display:none;">
+
+    <div class="menu-modal-content">
+
+        <div class="menu-modal-header">
+            <div>
+                <h2 id="menuModalTitle">Add New Menu Item</h2>
+                <p>Enter the food item details below.</p>
+            </div>
+
+            <button type="button" id="closeMenuModal"
+                    class="modal-close-btn">✕</button>
+        </div>
+
+
+        <form id="menuItemForm">
+
+            <input type="hidden" id="menuItemId">
+
+            <div class="menu-form-grid">
+
+                <div class="menu-form-group">
+                    <label for="menuItemName">Food Item Name *</label>
+                    <input type="text" id="menuItemName"
+                           placeholder="e.g. Paneer Dosa" required>
+                </div>
+
+                <div class="menu-form-group">
+                    <label for="menuItemCategory">Category *</label>
+                    <select id="menuItemCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Main Course">Main Course</option>
+                        <option value="Dessert">Dessert</option>
+                        <option value="Beverages">Beverages</option>
+                        <option value="Snacks">Snacks</option>
+                    </select>
+                </div>
+
+                <div class="menu-form-group">
+                    <label for="menuItemPrice">Price (₹) *</label>
+                    <input type="number" id="menuItemPrice"
+                           min="0.01" step="0.01" required>
+                </div>
+
+                <div class="menu-form-group">
+                    <label for="menuItemStock">Stock Quantity *</label>
+                    <input type="number" id="menuItemStock"
+                           min="0" step="1" required>
+                </div>
+
+                <div class="menu-form-group">
+                    <label for="menuVendorName">Vendor Name</label>
+                    <input type="text" id="menuVendorName"
+                           placeholder="Enter vendor name">
+                </div>
+
+                <div class="menu-form-group">
+                    <label for="menuVendorPhone">Vendor Phone</label>
+                    <input type="tel" id="menuVendorPhone"
+                           placeholder="Enter vendor phone">
+                </div>
+
+            </div>
+
+
+            <div class="menu-modal-actions">
+
+                <button type="button" id="cancelMenuModal"
+                        class="secondary-button">
+                    Cancel
+                </button>
+
+                <button type="submit" id="saveMenuItem"
+                        class="primary-btn">
+                    Save Menu Item
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="../js/app.js"></script>
+
+</body>
+</html>
